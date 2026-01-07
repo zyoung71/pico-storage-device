@@ -100,6 +100,7 @@ public:
     virtual bool Seek(uint64_t index) = 0;
     virtual bool SeekStart() = 0;
     virtual bool SeekEnd() = 0;
+    virtual bool SeekStep(int64_t d_index) = 0;
 
     virtual uint64_t GetFileSize(const char* path) const = 0;
     virtual uint64_t GetFileSize() const = 0;
