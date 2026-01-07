@@ -53,7 +53,13 @@ public:
 struct DirectoryEntry
 {
     char name[256];
-    uint32_t attributes_mask;
+    uint64_t file_size;
+    uint32_t date_modified;
+    uint32_t time_modified;
+    bool is_readonly; // i dont like using individual booleans but i dont have a choice if i wanna keep compatibility
+    bool is_hidden;
+    bool is_system;
+    bool is_archive;
     bool is_directory;
 };
 
