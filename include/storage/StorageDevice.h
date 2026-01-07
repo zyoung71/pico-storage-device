@@ -119,6 +119,20 @@ public:
     virtual size_t AppendString(const char* str, bool keep_index = true) = 0;
     virtual size_t AppendCharacter(char c, bool keep_index = true) = 0;
 
+    virtual size_t FindFirstBuffer(const void* buffer, size_t max_bytes) = 0;
+    virtual size_t FindFirstString(const char* str) = 0;
+    virtual size_t FindFirstCharacter(char c) = 0;
+    virtual size_t FindLastBuffer(const void* buffer, size_t max_bytes) = 0;
+    virtual size_t FindLastString(const char* str) = 0;
+    virtual size_t FindLastCharacter(char c) = 0;
+
+    bool FindAndReplaceFirstBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
+    bool FindAndReplaceFirstString(const char* old_str, const char* new_str);
+    bool FindAndReplaceFirstCharacter(char old_c, char new_c);
+    bool FindAndReplaceLastBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
+    bool FindAndReplaceLastString(const char* old_str, const char* new_str);
+    bool FindAndReplaceLastCharacter(char old_c, char new_c);
+
     virtual bool ClearFile(uint64_t begin_index, uint64_t end_index) = 0;
     virtual bool ClearFile(uint64_t begin_index = 0) = 0;
 
