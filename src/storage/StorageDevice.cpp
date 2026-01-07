@@ -54,6 +54,7 @@ StorageDeviceStream& StorageDeviceStream::operator>>(char* strbuff)
 {
     size_t len = strlen(strbuff);
     storage_device->ReadBuffer(strbuff, len);
+    return *this;
 }
 
 StorageDeviceStream& StorageDeviceStream::operator>>(char& c)
