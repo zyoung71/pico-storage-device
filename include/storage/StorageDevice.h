@@ -110,6 +110,7 @@ public:
     virtual size_t ReadBuffer(void* buffer, size_t max_bytes) = 0;
     virtual char ReadCharacter() = 0;
     virtual size_t ReadAll(UniqueArray<char>& buffer) = 0;
+    virtual size_t ReadLine(UniqueArray<char>& buffer, bool from_start_of_line = false) = 0;
 
     virtual size_t WriteBuffer(const void* buffer, size_t max_bytes) = 0;
     virtual size_t WriteString(const char* str) = 0;
