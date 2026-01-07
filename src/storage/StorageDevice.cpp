@@ -92,69 +92,9 @@ StorageDeviceStream& StorageDeviceStream::operator>>(char& c)
     return *this;
 }
 
-bool StorageDevice::SeekNextBuffer(const void* buffer, size_t max_bytes)
-{
-    int64_t idx = FindNextBuffer(buffer, max_bytes);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
-bool StorageDevice::SeekNextString(const char* strbuff)
-{
-    int64_t idx = FindNextString(strbuff);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
-bool StorageDevice::SeekNextCharacter(char c)
-{
-    int64_t idx = FindNextCharacter(c);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
-bool StorageDevice::SeekPreviousBuffer(const void* buffer, size_t max_bytes)
-{
-    int64_t idx = FindPreviousBuffer(buffer, max_bytes);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
-bool StorageDevice::SeekPreviousString(const char* strbuff)
-{
-    int64_t idx = FindPreviousString(strbuff);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
-bool StorageDevice::SeekPreviousCharacter(char c)
-{
-    int64_t idx = FindPreviousCharacter(c);
-    if (idx >= 0)
-    {
-        return Seek(idx);
-    }
-    return false;
-}
-
 bool StorageDevice::FindAndReplaceNextBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
 {
-    if (Seek(FindNextBuffer(old_buffer, old_bytes)))
+    if (FindNextBuffer(old_buffer, old_bytes, false) >= 0)
     {
         return WriteBuffer(new_buffer, new_bytes);
     }
@@ -163,7 +103,7 @@ bool StorageDevice::FindAndReplaceNextBuffer(const void* old_buffer, const void*
 
 bool StorageDevice::FindAndReplaceNextString(const char* old_str, const char* new_str)
 {
-    if (Seek(FindNextString(old_str)))
+    if (FindNextString(old_str, false) >= 0)
     {
         return WriteString(new_str);
     }
@@ -172,7 +112,7 @@ bool StorageDevice::FindAndReplaceNextString(const char* old_str, const char* ne
 
 bool StorageDevice::FindAndReplaceNextCharacter(char old_c, char new_c)
 {
-    if (Seek(FindNextCharacter(old_c)))
+    if (FindNextCharacter(old_c, false) >= 0)
     {
         return WriteCharacter(new_c);
     }
@@ -181,7 +121,7 @@ bool StorageDevice::FindAndReplaceNextCharacter(char old_c, char new_c)
 
 bool StorageDevice::FindAndReplacePreviousBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
 {
-    if (Seek(FindPreviousBuffer(old_buffer, old_bytes)))
+    if (FindPreviousBuffer(old_buffer, old_bytes, false) >= 0)
     {
         return WriteBuffer(new_buffer, new_bytes);
     }
@@ -190,7 +130,7 @@ bool StorageDevice::FindAndReplacePreviousBuffer(const void* old_buffer, const v
 
 bool StorageDevice::FindAndReplacePreviousString(const char* old_str, const char* new_str)
 {
-    if (Seek(FindPreviousString(old_str)))
+    if (FindPreviousString(old_str, false) >= 0)
     {
         return WriteString(new_str);
     }
@@ -199,7 +139,7 @@ bool StorageDevice::FindAndReplacePreviousString(const char* old_str, const char
 
 bool StorageDevice::FindAndReplacePreviousCharacter(char old_c, char new_c)
 {
-    if (Seek(FindPreviousCharacter(old_c)))
+    if (FindPreviousCharacter(old_c, false) >= 0)
     {
         return WriteCharacter(new_c);
     }

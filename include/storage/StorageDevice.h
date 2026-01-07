@@ -109,13 +109,6 @@ public:
     virtual bool SeekEnd() = 0;
     virtual bool SeekStep(int64_t d_index) = 0;
 
-    bool SeekNextBuffer(const void* buffer, size_t max_bytes);
-    bool SeekNextString(const char* strbuff);
-    bool SeekNextCharacter(char c);
-    bool SeekPreviousBuffer(const void* buffer, size_t max_bytes);
-    bool SeekPreviousString(const char* strbuff);
-    bool SeekPreviousCharacter(char c);
-
     virtual uint64_t GetFileSize(const char* path) const = 0;
     virtual uint64_t GetFileSize() const = 0;
     virtual uint64_t GetFreeSpace() const = 0;
@@ -135,12 +128,12 @@ public:
     virtual size_t AppendString(const char* str, bool keep_index = true) = 0;
     virtual size_t AppendCharacter(char c, bool keep_index = true) = 0;
 
-    virtual int64_t FindNextBuffer(const void* buffer, size_t max_bytes) = 0;
-    virtual int64_t FindNextString(const char* str) = 0;
-    virtual int64_t FindNextCharacter(char c) = 0;
-    virtual int64_t FindPreviousBuffer(const void* buffer, size_t max_bytes) = 0;
-    virtual int64_t FindPreviousString(const char* str) = 0;
-    virtual int64_t FindPreviousCharacter(char c) = 0;
+    virtual int64_t FindNextBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
+    virtual int64_t FindNextString(const char* str, bool keep_index = true) = 0;
+    virtual int64_t FindNextCharacter(char c, bool keep_index = true) = 0;
+    virtual int64_t FindPreviousBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
+    virtual int64_t FindPreviousString(const char* str, bool keep_index = true) = 0;
+    virtual int64_t FindPreviousCharacter(char c, bool keep_index = true) = 0;
 
     bool FindAndReplaceNextBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
     bool FindAndReplaceNextString(const char* old_str, const char* new_str);

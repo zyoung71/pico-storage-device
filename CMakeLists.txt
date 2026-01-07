@@ -2,6 +2,7 @@ if (NOT TARGET pico-storage-device)
 
     add_library(pico-storage-device STATIC
         src/storage/StorageDevice.cpp
+        src/storage/FileContentsMap.cpp
     )
 
     add_subdirectory(lib/pico-util)
