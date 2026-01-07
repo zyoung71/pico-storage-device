@@ -75,6 +75,9 @@ class StorageDevice
 protected:
     StorageDeviceStream stream;
 
+    bool is_file_open = false;
+    bool is_mounted = false;
+
     virtual uint32_t TranslateFileAccessFlags(FileAccess access) = 0;
 
 public:
@@ -140,6 +143,17 @@ public:
 
     virtual bool Delete(const char* file_path) = 0;
     virtual bool Delete() = 0;
+
+    inline bool IsFileOpen() const
+    {
+        return is_file_open;
+    }
+    inline bool IsMounted() const
+    {
+        return is_mounted;
+    }
+    
+    virtual bool Exists(const char* path) const = 0;
 
     inline StorageDeviceStream& GetStream()
     {
