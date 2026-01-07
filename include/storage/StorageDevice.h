@@ -111,6 +111,13 @@ public:
     virtual bool SeekEnd() = 0;
     virtual bool SeekStep(int64_t d_index) = 0;
 
+    bool SeekNextBuffer(const void* buffer, size_t max_bytes);
+    bool SeekNextString(const char* strbuff);
+    bool SeekNextCharacter(char c);
+    bool SeekPreviousBuffer(const void* buffer, size_t max_bytes);
+    bool SeekPreviousString(const char* strbuff);
+    bool SeekPreviousCharacter(char c);
+
     virtual uint64_t GetFileSize(const char* path) const = 0;
     virtual uint64_t GetFileSize() const = 0;
     virtual uint64_t GetFreeSpace() const = 0;
@@ -130,19 +137,19 @@ public:
     virtual size_t AppendString(const char* str, bool keep_index = true) = 0;
     virtual size_t AppendCharacter(char c, bool keep_index = true) = 0;
 
-    virtual size_t FindFirstBuffer(const void* buffer, size_t max_bytes) = 0;
-    virtual size_t FindFirstString(const char* str) = 0;
-    virtual size_t FindFirstCharacter(char c) = 0;
-    virtual size_t FindLastBuffer(const void* buffer, size_t max_bytes) = 0;
-    virtual size_t FindLastString(const char* str) = 0;
-    virtual size_t FindLastCharacter(char c) = 0;
+    virtual int64_t FindNextBuffer(const void* buffer, size_t max_bytes) = 0;
+    virtual int64_t FindNextString(const char* str) = 0;
+    virtual int64_t FindNextCharacter(char c) = 0;
+    virtual int64_t FindPreviousBuffer(const void* buffer, size_t max_bytes) = 0;
+    virtual int64_t FindPreviousString(const char* str) = 0;
+    virtual int64_t FindPreviousCharacter(char c) = 0;
 
-    bool FindAndReplaceFirstBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
-    bool FindAndReplaceFirstString(const char* old_str, const char* new_str);
-    bool FindAndReplaceFirstCharacter(char old_c, char new_c);
-    bool FindAndReplaceLastBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
-    bool FindAndReplaceLastString(const char* old_str, const char* new_str);
-    bool FindAndReplaceLastCharacter(char old_c, char new_c);
+    bool FindAndReplaceNextBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
+    bool FindAndReplaceNextString(const char* old_str, const char* new_str);
+    bool FindAndReplaceNextCharacter(char old_c, char new_c);
+    bool FindAndReplacePreviousBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
+    bool FindAndReplacePreviousString(const char* old_str, const char* new_str);
+    bool FindAndReplacePreviousCharacter(char old_c, char new_c);
 
     virtual bool ClearFile(uint64_t begin_index, uint64_t end_index) = 0;
     virtual bool ClearFile(uint64_t begin_index = 0) = 0;

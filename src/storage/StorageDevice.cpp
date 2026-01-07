@@ -92,54 +92,114 @@ StorageDeviceStream& StorageDeviceStream::operator>>(char& c)
     return *this;
 }
 
-bool StorageDevice::FindAndReplaceFirstBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
+bool StorageDevice::SeekNextBuffer(const void* buffer, size_t max_bytes)
 {
-    if (Seek(FindFirstBuffer(old_buffer, old_bytes)))
+    int64_t idx = FindNextBuffer(buffer, max_bytes);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::SeekNextString(const char* strbuff)
+{
+    int64_t idx = FindNextString(strbuff);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::SeekNextCharacter(char c)
+{
+    int64_t idx = FindNextCharacter(c);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::SeekPreviousBuffer(const void* buffer, size_t max_bytes)
+{
+    int64_t idx = FindPreviousBuffer(buffer, max_bytes);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::SeekPreviousString(const char* strbuff)
+{
+    int64_t idx = FindPreviousString(strbuff);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::SeekPreviousCharacter(char c)
+{
+    int64_t idx = FindPreviousCharacter(c);
+    if (idx >= 0)
+    {
+        return Seek(idx);
+    }
+    return false;
+}
+
+bool StorageDevice::FindAndReplaceNextBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
+{
+    if (Seek(FindNextBuffer(old_buffer, old_bytes)))
     {
         return WriteBuffer(new_buffer, new_bytes);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceFirstString(const char* old_str, const char* new_str)
+bool StorageDevice::FindAndReplaceNextString(const char* old_str, const char* new_str)
 {
-    if (Seek(FindFirstString(old_str)))
+    if (Seek(FindNextString(old_str)))
     {
         return WriteString(new_str);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceFirstCharacter(char old_c, char new_c)
+bool StorageDevice::FindAndReplaceNextCharacter(char old_c, char new_c)
 {
-    if (Seek(FindFirstCharacter(old_c)))
+    if (Seek(FindNextCharacter(old_c)))
     {
         return WriteCharacter(new_c);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceLastBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
+bool StorageDevice::FindAndReplacePreviousBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes)
 {
-    if (Seek(FindLastBuffer(old_buffer, old_bytes)))
+    if (Seek(FindPreviousBuffer(old_buffer, old_bytes)))
     {
         return WriteBuffer(new_buffer, new_bytes);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceLastString(const char* old_str, const char* new_str)
+bool StorageDevice::FindAndReplacePreviousString(const char* old_str, const char* new_str)
 {
-    if (Seek(FindLastString(old_str)))
+    if (Seek(FindPreviousString(old_str)))
     {
         return WriteString(new_str);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceLastCharacter(char old_c, char new_c)
+bool StorageDevice::FindAndReplacePreviousCharacter(char old_c, char new_c)
 {
-    if (Seek(FindLastCharacter(old_c)))
+    if (Seek(FindPreviousCharacter(old_c)))
     {
         return WriteCharacter(new_c);
     }
