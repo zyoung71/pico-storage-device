@@ -62,6 +62,7 @@ protected:
     StorageDeviceStream stream;
 
 public:
+    inline StorageDevice() : stream(this) {}
     virtual ~StorageDevice() = default;
 
     virtual UniqueArray<DirectoryEntry> PeekDirectory(const char* dir_path) = 0;
