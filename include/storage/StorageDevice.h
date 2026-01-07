@@ -57,10 +57,25 @@ struct DirectoryEntry
     bool is_directory;
 };
 
+enum FileAccess
+{
+    READ = 1 << 0,
+    WRITE = 1 << 1,
+    OPEN_EXISTING = 1 << 2,
+    CREATE_OVERWRITE = 1 << 3,
+    CREATE_NEW = 1 << 4,
+    OPEN_OVERWRITE = 1 << 5,
+    OPEN_APPEND = 1 << 6
+};
+
+uint32_t posix_to_fileaccess_mask(const char* posix);
+
 class StorageDevice
 {
 protected:
     StorageDeviceStream stream;
+
+    virtual uint32_t TranslateFileAccessFlags(FileAccess access) = 0;
 
 public:
     inline StorageDevice() : stream(this) {}
@@ -70,6 +85,7 @@ public:
     virtual size_t GetTotalCountInDirectory(const char* dir_path) = 0;
     virtual size_t GetFileCountInDirectory(const char* dir_path) = 0;
     virtual size_t GetDirectoryCountInDirectory(const char* dir_path) = 0;
+    virtual DirectoryEntry GetDirectoryEntry(const char* path) = 0;
 
     virtual bool ChangeDirectory(const char* path) = 0;
     virtual bool CreateDirectory(const char* dir_path) = 0;
