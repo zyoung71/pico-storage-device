@@ -68,10 +68,10 @@ enum FileAccess
     READ = 1 << 0,
     WRITE = 1 << 1,
     OPEN_EXISTING = 1 << 2,
-    CREATE_OVERWRITE = 1 << 3,
-    CREATE_NEW = 1 << 4,
-    OPEN_OVERWRITE = 1 << 5,
-    OPEN_APPEND = 1 << 6
+    OPEN_OVERWRITE = 1 << 3,
+    OPEN_APPEND = 1 << 4,
+    CREATE_NEW = 1 << 5,
+    CREATE_OVERWRITE = 1 << 6
 };
 
 uint32_t posix_to_fileaccess_mask(const char* posix);
@@ -83,8 +83,6 @@ protected:
 
     bool is_file_open = false;
     bool is_mounted = false;
-
-    virtual uint32_t TranslateFileAccessFlags(FileAccess access) = 0;
 
 public:
     inline StorageDevice() : stream(this) {}
@@ -103,7 +101,7 @@ public:
 
     virtual bool Mount() = 0;
     virtual bool Unmount() = 0;
-    virtual bool OpenFile(const char* file_path, uint8_t permissions_mask) = 0;
+    virtual bool OpenFile(const char* file_path, uint32_t access_mask) = 0;
     virtual bool CloseFile() = 0;
     
     virtual bool Seek(uint64_t index) = 0;
