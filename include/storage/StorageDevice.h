@@ -88,11 +88,11 @@ public:
     inline StorageDevice() : stream(this) {}
     virtual ~StorageDevice() = default;
 
-    virtual UniqueArray<DirectoryEntry> PeekDirectory(const char* dir_path) = 0;
-    virtual size_t GetTotalCountInDirectory(const char* dir_path) = 0;
-    virtual size_t GetFileCountInDirectory(const char* dir_path) = 0;
-    virtual size_t GetDirectoryCountInDirectory(const char* dir_path) = 0;
-    virtual DirectoryEntry GetDirectoryEntry(const char* path) = 0;
+    virtual UniqueArray<DirectoryEntry> PeekDirectory(const char* dir_path) const = 0;
+    virtual size_t GetTotalCountInDirectory(const char* dir_path) const = 0;
+    virtual size_t GetFileCountInDirectory(const char* dir_path) const = 0;
+    virtual size_t GetDirectoryCountInDirectory(const char* dir_path) const = 0;
+    virtual DirectoryEntry GetDirectoryEntry(const char* path) const = 0;
 
     virtual bool ChangeDirectory(const char* path) = 0;
     virtual bool CreateDirectory(const char* dir_path) = 0;
