@@ -54,6 +54,7 @@ struct DirectoryEntry
 {
     char name[256];
     uint32_t attributes_mask;
+    bool is_directory;
 };
 
 class StorageDevice
