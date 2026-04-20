@@ -13,6 +13,7 @@ private:
 
 public:
     inline StorageDeviceStream(StorageDevice* storage_device) : storage_device(storage_device) {}
+    StorageDeviceStream(const StorageDeviceStream&) = delete; // streams are meant to be accessed as references
 
     StorageDeviceStream& InsertBuffer(const void* buffer, size_t len);
     StorageDeviceStream& operator<<(const BufferView<void>& buffer);
