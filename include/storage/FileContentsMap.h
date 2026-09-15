@@ -10,5 +10,6 @@ protected:
 public:
     inline FileContentsMap(StorageDevice* storage_dev) : storage_dev(storage_dev) {}
 
-    UniqueArray<char> GetValue(const char* key);
+    UniqueArray<char> GetValueUTF8(const char* key);
+    UniqueArray<char16_t> GetValueUTF16(const char16_t* key);
 };
