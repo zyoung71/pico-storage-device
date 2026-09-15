@@ -114,13 +114,13 @@ StorageDeviceStream& StorageDeviceStream::operator>>(char16_t* strbuff)
 
 StorageDeviceStream& StorageDeviceStream::operator>>(char& c)
 {
-    c = storage_device->ReadCharacterU8();
+    c = storage_device->ReadCharacterUTF8();
     return *this;
 }
 
 StorageDeviceStream& StorageDeviceStream::operator>>(char16_t& c)
 {
-    c = storage_device->ReadCharacterU16();
+    c = storage_device->ReadCharacterUTF16();
     return *this;
 }
 

@@ -124,8 +124,8 @@ public:
     virtual float GetSpaceUsedPercentage() const = 0;
 
     virtual size_t ReadBuffer(void* buffer, size_t max_bytes) = 0;
-    virtual char ReadCharacterU8() = 0;
-    virtual char16_t ReadCharacterU16() = 0;
+    virtual char ReadCharacterUTF8() = 0;
+    virtual char16_t ReadCharacterUTF16() = 0;
     virtual size_t ReadAllUTF8(UniqueArray<char>& buffer) = 0;
     virtual size_t ReadAllUTF16(UniqueArray<char16_t>& buffer) = 0;
     virtual size_t ReadLineUTF8(UniqueArray<char>& buffer, bool from_start_of_line = false) = 0;
