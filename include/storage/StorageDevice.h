@@ -60,7 +60,7 @@ public:
 
 struct DirectoryEntry
 {
-    char16_t name[256];
+    char name[256];
     uint64_t file_size;
     uint32_t date_modified;
     uint32_t time_modified;
