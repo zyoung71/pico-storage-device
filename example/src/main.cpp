@@ -5,10 +5,7 @@ int main()
 {
     stdio_init_all();
 
-    StorageDevice* devUTF8;
-    StorageDevice* devUTF16;
-    auto& sdsUTF8 = devUTF8->GetStream();
-    auto& sdsUTF16 = devUTF16->GetStream();
-    sdsUTF8 << "hi";
-    sdsUTF16 << u"hi";
+    StorageDevice* dev;
+    auto& sds = dev->GetStream();
+    sds << "hi";
 }

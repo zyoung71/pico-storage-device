@@ -1,5 +1,4 @@
 #include <storage/StorageDevice.h>
-#include <util/Char16.h>
 
 #include <string.h>
 
@@ -52,37 +51,19 @@ StorageDeviceStream& StorageDeviceStream::operator<<(const ArrayAccessor<void>& 
 
 StorageDeviceStream& StorageDeviceStream::operator<<(const char* strbuff)
 {
-    storage_device->WriteStringUTF8(strbuff);
-    return *this;
-}
-
-StorageDeviceStream& StorageDeviceStream::operator<<(const char16_t* strbuff)
-{
-    storage_device->WriteStringUTF16(strbuff);
+    storage_device->WriteString(strbuff);
     return *this;
 }
 
 StorageDeviceStream& StorageDeviceStream::operator<<(char* strbuff)
 {
-    storage_device->WriteStringUTF8(strbuff);
-    return *this;
-}
-
-StorageDeviceStream& StorageDeviceStream::operator<<(char16_t* strbuff)
-{
-    storage_device->WriteStringUTF16(strbuff);
+    storage_device->WriteString(strbuff);
     return *this;
 }
 
 StorageDeviceStream& StorageDeviceStream::operator<<(char c)
 {
-    storage_device->WriteCharacterUTF8(c);
-    return *this;
-}
-
-StorageDeviceStream& StorageDeviceStream::operator<<(char16_t c)
-{
-    storage_device->WriteCharacterUTF16(c);
+    storage_device->WriteCharacter(c);
     return *this;
 }
 
@@ -105,22 +86,9 @@ StorageDeviceStream& StorageDeviceStream::operator>>(char* strbuff)
     return *this;
 }
 
-StorageDeviceStream& StorageDeviceStream::operator>>(char16_t* strbuff)
-{
-    size_t len = strlen16(strbuff);
-    storage_device->ReadBuffer(strbuff, len * 2);
-    return *this;
-}
-
 StorageDeviceStream& StorageDeviceStream::operator>>(char& c)
 {
-    c = storage_device->ReadCharacterUTF8();
-    return *this;
-}
-
-StorageDeviceStream& StorageDeviceStream::operator>>(char16_t& c)
-{
-    c = storage_device->ReadCharacterUTF16();
+    c = storage_device->ReadCharacter();
     return *this;
 }
 
@@ -133,38 +101,20 @@ bool StorageDevice::FindAndReplaceNextBuffer(const void* old_buffer, const void*
     return false;
 }
 
-bool StorageDevice::FindAndReplaceNextStringUTF8(const char* old_str, const char* new_str)
+bool StorageDevice::FindAndReplaceNextString(const char* old_str, const char* new_str)
 {
-    if (FindNextStringUTF8(old_str, false) >= 0)
+    if (FindNextString(old_str, false) >= 0)
     {
-        return WriteStringUTF8(new_str);
+        return WriteString(new_str);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplaceNextStringUTF16(const char16_t* old_str, const char16_t* new_str)
+bool StorageDevice::FindAndReplaceNextCharacter(char old_c, char new_c)
 {
-    if (FindNextStringUTF16(old_str, false) >= 0)
+    if (FindNextCharacter(old_c, false) >= 0)
     {
-        return WriteStringUTF16(new_str);
-    }
-    return false;
-}
-
-bool StorageDevice::FindAndReplaceNextCharacterUTF8(char old_c, char new_c)
-{
-    if (FindNextCharacterUTF8(old_c, false) >= 0)
-    {
-        return WriteCharacterUTF8(new_c);
-    }
-    return false;
-}
-
-bool StorageDevice::FindAndReplaceNextCharacterUTF16(char16_t old_c, char16_t new_c)
-{
-    if (FindNextCharacterUTF16(old_c, false) >= 0)
-    {
-        return WriteCharacterUTF16(new_c);
+        return WriteCharacter(new_c);
     }
     return false;
 }
@@ -178,38 +128,20 @@ bool StorageDevice::FindAndReplacePreviousBuffer(const void* old_buffer, const v
     return false;
 }
 
-bool StorageDevice::FindAndReplacePreviousStringUTF8(const char* old_str, const char* new_str)
+bool StorageDevice::FindAndReplacePreviousString(const char* old_str, const char* new_str)
 {
-    if (FindPreviousStringUTF8(old_str, false) >= 0)
+    if (FindPreviousString(old_str, false) >= 0)
     {
-        return WriteStringUTF8(new_str);
+        return WriteString(new_str);
     }
     return false;
 }
 
-bool StorageDevice::FindAndReplacePreviousStringUTF16(const char16_t* old_str, const char16_t* new_str)
+bool StorageDevice::FindAndReplacePreviousCharacter(char old_c, char new_c)
 {
-    if (FindPreviousStringUTF16(old_str, false) >= 0)
+    if (FindPreviousCharacter(old_c, false) >= 0)
     {
-        return WriteStringUTF16(new_str);
-    }
-    return false;
-}
-
-bool StorageDevice::FindAndReplacePreviousCharacterUTF8(char old_c, char new_c)
-{
-    if (FindPreviousCharacterUTF8(old_c, false) >= 0)
-    {
-        return WriteCharacterUTF8(new_c);
-    }
-    return false;
-}
-
-bool StorageDevice::FindAndReplacePreviousCharacterUTF16(char16_t old_c, char16_t new_c)
-{
-    if (FindPreviousCharacterUTF16(old_c, false) >= 0)
-    {
-        return WriteCharacterUTF16(new_c);
+        return WriteCharacter(new_c);
     }
     return false;
 }

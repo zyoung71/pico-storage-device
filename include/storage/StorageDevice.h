@@ -22,10 +22,7 @@ public:
     StorageDeviceStream& operator<<(const ArrayAccessor<void>& buffer);
     StorageDeviceStream& operator<<(const char* strbuff);
     StorageDeviceStream& operator<<(char* strbuff);
-    StorageDeviceStream& operator<<(const char16_t* strbuff);
-    StorageDeviceStream& operator<<(char16_t* strbuff);
     StorageDeviceStream& operator<<(char c);
-    StorageDeviceStream& operator<<(char16_t c);
 
     template<typename T>
     StorageDeviceStream& operator<<(const T& item)
@@ -53,9 +50,7 @@ public:
     StorageDeviceStream& ExtractBuffer(void* buffer, size_t length);
     StorageDeviceStream& operator>>(ArrayAccessor<void>& buffer);
     StorageDeviceStream& operator>>(char* strbuff);
-    StorageDeviceStream& operator>>(char16_t* strbuff);
     StorageDeviceStream& operator>>(char& c);
-    StorageDeviceStream& operator>>(char16_t& c);
 };
 
 struct DirectoryEntry
@@ -124,48 +119,33 @@ public:
     virtual float GetSpaceUsedPercentage() const = 0;
 
     virtual size_t ReadBuffer(void* buffer, size_t max_bytes) = 0;
-    virtual char ReadCharacterUTF8() = 0;
-    virtual char16_t ReadCharacterUTF16() = 0;
-    virtual size_t ReadAllUTF8(UniqueArray<char>& buffer) = 0;
-    virtual size_t ReadAllUTF16(UniqueArray<char16_t>& buffer) = 0;
-    virtual size_t ReadLineUTF8(UniqueArray<char>& buffer, bool from_start_of_line = false) = 0;
-    virtual size_t ReadLineUTF16(UniqueArray<char16_t>& buffer, bool from_start_of_line = false) = 0;
+    virtual char ReadCharacter() = 0;
+    virtual size_t ReadAll(UniqueArray<char>& buffer) = 0;
+    virtual size_t ReadLine(UniqueArray<char>& buffer, bool from_start_of_line = false) = 0;
 
     virtual size_t WriteBuffer(const void* buffer, size_t max_bytes) = 0;
-    virtual size_t WriteStringUTF8(const char* str) = 0;
-    virtual size_t WriteStringUTF16(const char16_t* str) = 0;
-    virtual size_t WriteCharacterUTF8(char c) = 0;
-    virtual size_t WriteCharacterUTF16(char16_t c) = 0;
+    virtual size_t WriteString(const char* str) = 0;
+    virtual size_t WriteCharacter(char c) = 0;
 
     virtual size_t AppendBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
-    virtual size_t AppendStringUTF8(const char* str, bool keep_index = true) = 0;
-    virtual size_t AppendStringUTF16(const char16_t* str, bool keep_index = true) = 0;
-    virtual size_t AppendCharacterUTF8(char c, bool keep_index = true) = 0;
-    virtual size_t AppendCharacterUTF16(char16_t c, bool keep_index = true) = 0;
+    virtual size_t AppendString(const char* str, bool keep_index = true) = 0;
+    virtual size_t AppendCharacter(char c, bool keep_index = true) = 0;
 
     virtual int64_t FindNextBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
-    virtual int64_t FindNextStringUTF8(const char* str, bool keep_index = true) = 0;
-    virtual int64_t FindNextStringUTF16(const char16_t* str, bool keep_index = true) = 0;
-    virtual int64_t FindNextCharacterUTF8(char c, bool keep_index = true) = 0;
-    virtual int64_t FindNextCharacterUTF16(char16_t c, bool keep_index = true) = 0;
+    virtual int64_t FindNextString(const char* str, bool keep_index = true) = 0;
+    virtual int64_t FindNextCharacter(char c, bool keep_index = true) = 0;
 
     virtual int64_t FindPreviousBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
-    virtual int64_t FindPreviousStringUTF8(const char* str, bool keep_index = true) = 0;
-    virtual int64_t FindPreviousStringUTF16(const char16_t* str, bool keep_index = true) = 0;
-    virtual int64_t FindPreviousCharacterUTF8(char c, bool keep_index = true) = 0;
-    virtual int64_t FindPreviousCharacterUTF16(char16_t c, bool keep_index = true) = 0;
+    virtual int64_t FindPreviousString(const char* str, bool keep_index = true) = 0;
+    virtual int64_t FindPreviousCharacter(char c, bool keep_index = true) = 0;
 
     bool FindAndReplaceNextBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
-    bool FindAndReplaceNextStringUTF8(const char* old_str, const char* new_str);
-    bool FindAndReplaceNextStringUTF16(const char16_t* old_str, const char16_t* new_str);
-    bool FindAndReplaceNextCharacterUTF8(char old_c, char new_c);
-    bool FindAndReplaceNextCharacterUTF16(char16_t old_c, char16_t new_c);
+    bool FindAndReplaceNextString(const char* old_str, const char* new_str);
+    bool FindAndReplaceNextCharacter(char old_c, char new_c);
 
     bool FindAndReplacePreviousBuffer(const void* old_buffer, const void* new_buffer, size_t old_bytes, size_t new_bytes);
-    bool FindAndReplacePreviousStringUTF8(const char* old_str, const char* new_str);
-    bool FindAndReplacePreviousStringUTF16(const char16_t* old_str, const char16_t* new_str); 
-    bool FindAndReplacePreviousCharacterUTF8(char old_c, char new_c);
-    bool FindAndReplacePreviousCharacterUTF16(char16_t old_c, char16_t new_c);
+    bool FindAndReplacePreviousString(const char* old_str, const char* new_str);
+    bool FindAndReplacePreviousCharacter(char old_c, char new_c);
 
     virtual bool ClearFile(uint64_t begin_index, uint64_t end_index) = 0;
     virtual bool ClearFile(uint64_t begin_index = 0) = 0;
