@@ -147,7 +147,7 @@ public:
     virtual int64_t FindNextStringUTF8(const char* str, bool keep_index = true) = 0;
     virtual int64_t FindNextStringUTF16(const char16_t* str, bool keep_index = true) = 0;
     virtual int64_t FindNextCharacterUTF8(char c, bool keep_index = true) = 0;
-    virtual int64_t FindNextCharacterUTF16(char c, bool keep_index = true) = 0;
+    virtual int64_t FindNextCharacterUTF16(char16_t c, bool keep_index = true) = 0;
 
     virtual int64_t FindPreviousBuffer(const void* buffer, size_t max_bytes, bool keep_index = true) = 0;
     virtual int64_t FindPreviousStringUTF8(const char* str, bool keep_index = true) = 0;
