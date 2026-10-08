@@ -1,4 +1,4 @@
-#include <storage/StorageDevice.h>
+#include <storage/StorageDevice.hpp>
 
 #include <string.h>
 

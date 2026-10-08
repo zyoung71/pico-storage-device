@@ -1,4 +1,4 @@
-#include <storage/FileContentsMap.h>
+#include <storage/FileContentsMap.hpp>
 
 #include <cstring>
 

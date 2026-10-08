@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StorageDevice.h"
+#include "StorageDevice.hpp"
 
 class FileContentsMap
 {
