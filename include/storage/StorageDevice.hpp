@@ -1,8 +1,8 @@
 #pragma once
 
-#include <util/ArrayAccessor.h>
-#include <util/BufferView.h>
-#include <util/UniqueArray.h>
+#include <util/ArrayAccessor.hpp>
+#include <util/BufferView.hpp>
+#include <util/UniqueArray.hpp>
 
 #include <cstdint>
 
