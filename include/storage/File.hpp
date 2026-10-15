@@ -62,6 +62,7 @@ private:
     FileStream stream;
 
 public:
+    inline File() : stream(this) {}
     virtual ~File() = default;
 
     inline FileStream& GetStream()
