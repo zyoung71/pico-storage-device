@@ -109,7 +109,6 @@ public:
     virtual bool ClearFile(uint64_t begin_index, uint64_t end_index) = 0;
     virtual bool ClearFile(uint64_t begin_index = 0) = 0;
 
-    virtual bool Delete() = 0;
     virtual void Close() = 0;
 
     virtual bool IsFileOpen() const = 0;
