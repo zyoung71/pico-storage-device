@@ -1,14 +1,14 @@
 #pragma once
 
-#include "StorageDevice.hpp"
+#include "File.hpp"
 
 class FileContentsMap
 {
 protected:
-    StorageDevice* storage_dev;
+    File* file;
 
 public:
-    inline FileContentsMap(StorageDevice* storage_dev) : storage_dev(storage_dev) {}
+    inline FileContentsMap(File* file) : file(file) {}
 
     UniqueArray<char> GetValue(const char* key);
 };

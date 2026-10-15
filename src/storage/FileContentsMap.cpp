@@ -4,15 +4,15 @@
 
 UniqueArray<char> FileContentsMap::GetValue(const char* key)
 {
-    if (storage_dev->IsFileOpen())
+    if (file->IsFileOpen())
     {
-        storage_dev->SeekStart();
-        int64_t idx = storage_dev->FindNextString(key);
+        file->SeekStart();
+        int64_t idx = file->FindNextString(key);
         if (idx >= 0)
         {
-            storage_dev->Seek(idx + strlen(key) + 1); // move past key and equals sign
+            file->Seek(idx + strlen(key) + 1); // move past key and equals sign
             UniqueArray<char> ret;
-            storage_dev->ReadLine(ret, false);
+            file->ReadLine(ret, false);
             return std::move(ret);
         }
     }

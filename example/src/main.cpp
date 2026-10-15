@@ -6,6 +6,9 @@ int main()
     stdio_init_all();
 
     StorageDevice* dev;
-    auto& sds = dev->GetStream();
-    sds << "hi";
+
+    auto file = dev->OpenFile(".config", READ | WRITE);
+
+    auto& fstream = file->GetStream();
+    fstream << "hi";
 }
